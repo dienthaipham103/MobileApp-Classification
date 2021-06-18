@@ -1,0 +1,76 @@
+old apps:
+- amongus
+- freefire
+- lien quan
+- pinterest
+- pubg
+
+
+===========run==============
+python __main__.py --files 'data\amongus\amongus1.pcap', 'data\amongus\amongus2.pcap', 'data\amongus\amongus3.pcap', 'data\amongus\amongus4.pcap', 'data\amongus\amongus5.pcap', 'data\daifm\daifm.pcap', 'data\diijam\diijam.pcap', 'data\fptplay\fptplay1.pcap', 'data\fptplay\fptplay2.pcap', 'data\freefire\freefire.pcap', 'data\lienquan\lienquan1.pcap', 'data\lienquan\lienquan2.pcap', 'data\nhaccuatui\nhaccuatui.pcap', 'data\nhacvang\nhacvang.pcap', 'data\phim247\phim247_1.pcap', 'data\phim247\phim247_2.pcap', 'data\pinterest\pinterest1.pcap', 'data\pinterest\pinterest2.pcap', 'data\pubg\pubg1.pcap', 'data\pubg\pubg2.pcap', 'data\pubg\pubg3.pcap', 'data\pubg\pubg4.pcap', 'data\pubg\pubg5.pcap', 'data\sachnoiapp\sachnoiapp.pcap', 'data\soundcloud\soundcloud.pcap', 'data\spotify\spotify.pcap', 'data\truyenaudiosachnoiviet\truyenaudiosachnoiviet1.pcap', 'data\truyenaudiosachnoiviet\truyenaudiosachnoiviet2.pcap', 'data\tunefm\tunefm1.pcap', 'data\tunefm\tunefm2.pcap', 'data\voizfm\voizfm.pcap', 'data\vtvgo\vtvgo1.pcap', 'data\vtvgo\vtvgo2.pcap', 'data\youtube\youtube1.pcap', 'data\youtube\youtube2.pcap', 'data\zingmp3\zingmp3.pcap' --save 'xy'
+
+
+df = pd.read_csv(path, index_col=0)
+df = self.basic_reprocessing(df)
+
+df1 = df[['time']]
+# df1['time'] = df1['time'].apply(lambda x: EDecimal(x))
+
+df2 = df[['source_address', 'destination_address', 'source_port', 'destination_port', 'length']]
+df2 = df2.astype({'source_port': object, 'destination_port': object, 'length': object})
+df2['source_address'] = df2['source_address'].apply(lambda x: int(ipaddress.ip_address(x.split(',')[0])))
+df2['destination_address'] = df2['destination_address'].apply(lambda x: int(ipaddress.ip_address(x.split(',')[0])))
+
+# arr1 = df1.values.astype('float')
+# arr2 = df2.values.astype('int')
+self.packets = np.array(df, dtype=object)
+
+return np.array(np.concatenate((arr1, arr2), axis=1), dtype='object')
+# return arr2.dtype
+
+
+###################### RESULT ######################
+3 apps classification: youtube, zingmp3, voizfm
+Count flows:  Counter({'zingmp3': 89494, 'voizfm': 71187, 'youtube': 58993})
+
+              precision    recall  f1-score   support
+
+      voizfm       0.98      0.67      0.80      8153
+     youtube       0.58      0.88      0.70      5374
+     zingmp3       0.78      0.76      0.77      8497
+
+    accuracy                           0.76     22024
+   macro avg       0.78      0.77      0.75     22024
+weighted avg       0.80      0.76      0.76     22024
+
+
+
+
+
+
+              precision    recall  f1-score   support
+
+      voizfm       0.98      0.90      0.94     15868
+     youtube       0.97      0.94      0.95     12874
+     zingmp3       0.90      0.98      0.93     19598
+
+    accuracy                           0.94     48340
+   macro avg       0.95      0.94      0.94     48340
+weighted avg       0.95      0.94      0.94     48340
+
+-----------------------------------APPS------------------------------------------
+
+['among_us', 'animal_restaurant', 'azar', 'baohay24h', 'baomoi', 'bbc_news', 
+'bida', 'bigo', 'cake', 'chess', 'cho_tot', 'cnn_news', 'comico', 'co_tuong_online', 
+'dan_tri', 'diijam', 'dubsmash', 'facebook', 'fptplay', 'freefire', 'google_meet',  
+'hahalolo', 'hello_yo', 'instagram', 'iQIYI', 'jobway', 'kaka', 'kenh14', 'lazada', 
+'lienquan_mobile', 'likee_lite', 'linkedin', 'lotus', 'mangatoon', 'may', 'medoctruyen',
+'messenger', 'mobile_legend', 'myradio', 'netflix', 'nhaccuatui', 'nhacvang', 'nimotv', 
+'nonolive', 'noveltoon', 'ola_party', 'partying', 'phim247', 'pinterest', 'podcast_player',
+'popskid', 'pubg', 'quora', 'radiofm', 'reddit', 'sachnoiapp', 'sendo', 'shopee', 'skype', 
+'snapchat', 'soha', 'soundcloud', 'spotify', 'starmarker', 'tango', 'ted', 'telegram', 
+'thanhnien', 'the_guardian', 'tien_len', 'tiki', 'tiktok', 'tinder', 'tinhte', 'tinmoi24h',
+ 'tivi247', 'tivi24h', 'tivi360', 'tivi_truyentranh_webtoon', 'toc_chien', 'topcv',
+'truyenaudio', 'truyenaudiosachnoiviet', 'tunefm', 'tuoitre_online', 'twitch', 'twitter',
+ 'vieon', 'vietnamworks', 'vnexpress', 'voizfm', 'vtvgo', 'zoom', 'hago',
+'wallstreet_journal', 'weeboo', 'wesing', 'wetv', 'wikipedia', 'zalo', 'zingmp3']
