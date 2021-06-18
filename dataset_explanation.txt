@@ -6,7 +6,7 @@ Dataset/raw_data
 -	Contains 101 folders. Each folder is for one app.
 -	One app_folder contains: raw and extracted.
 + Dataset/raw_data/<appname>/raw: contains csv files 
-  (*created by pcap files*)
+  (_created by pcap files_)
 + Dataset/raw_data/<appname>/extracted: csv files. Each csv file contains mobile traffic from just one device 
   (*created by running extracting_devices.ipynb notebook*)
 
